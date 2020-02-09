@@ -1,7 +1,9 @@
 import scrapy
 import os
 
-os.remove("output1.json")
+out_file="output1.json"
+if os.path.exists(out_file):
+    os.remove(out_file)
 
 
 class MedicalSpider(scrapy.Spider):

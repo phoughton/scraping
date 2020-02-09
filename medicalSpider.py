@@ -17,8 +17,18 @@ class MedicalSpider(scrapy.Spider):
             yield response.follow(alphabet_item, self.parse)
 
             # company_page = response.css("a.key::attr(href)").get()
-        for company in response.css("a.key"):
-            yield {'companyName': company.css("a.key ::text").get(), 'companyURL': company.css("a.key ::attr(href)").get()}
+        #for company in response.css("a.key"):
+         #   yield {'companyName': company.css("a.key ::text").get(), 'companyURL': company.css("a.key ::attr(href)").get()}
+        
+        for href in response.css("a.key ::attr(href)"):
+            yield response.follow(href, self.parse_company_details)
+            
+    
+    def parse_company_details(self, response):
+        raw_contact = ' '.join(response.css('div.gfdCompanyDetailsCol ::text').getall())
+        yield {'companyName': response.css('h1 ::text').get(), 'companyContactDetails': " ".join(raw_contact.split())}
+
+                
         #yield {'companyName': response.css("a.key:last-child() ::text").get(), 'companyURL': response.css("a.key:last-child() ::attr(href)").get()}
 
             # if company_page is not None:

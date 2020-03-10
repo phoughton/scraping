@@ -1,6 +1,12 @@
-# scraping
+# An example web scraping project
 
-Run with:
+## Introduction
+
+This is a simple example of how to use [Scrapy](https://scrapy.org/) to collate data from a website and output the results in a JSON file.
+
+## Instructions
+
+First clone this repo, then `cd scraping` and run:
 ```
-scrapy runspider medicalSpider.py -o output1.json
+scrapy runspider medspider/spiders/medicalSpider.py -o medical_company_data.json
 ```
